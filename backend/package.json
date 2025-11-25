@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha test/**/*.test.js --timeout 10000",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
+  },
+  "keywords": [],
+  "author": "Ivan Palachuk",
+  "license": "ISC",
+  "description": "Backend API for Toolbox Challenge",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.8.2",
+    "standard": "^17.1.2",
+    "supertest": "^7.0.0"
+  }
+}
