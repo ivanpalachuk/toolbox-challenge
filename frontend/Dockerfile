@@ -25,6 +25,10 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copiar archivos estáticos desde el builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copiar archivos públicos (logo, favicon, etc.)
+COPY --from=builder /app/public/*.svg /usr/share/nginx/html/
+COPY --from=builder /app/public/*.jpg /usr/share/nginx/html/
+
 # Exponer puerto
 EXPOSE 80
 

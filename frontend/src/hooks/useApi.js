@@ -27,7 +27,16 @@ const useApi = () => {
 
     try {
       // Construir URL con query params
-      const url = new URL(`${BASE_URL}${endpoint}`);
+      let url;
+      const fullUrl = `${BASE_URL}${endpoint}`;
+      
+      // Si BASE_URL es relativa (empieza con /), construir URL manualmente
+      if (BASE_URL.startsWith('/')) {
+        url = new URL(fullUrl, window.location.origin);
+      } else {
+        url = new URL(fullUrl);
+      }
+      
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== '') {
           url.searchParams.append(key, value);

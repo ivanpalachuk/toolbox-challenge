@@ -181,10 +181,10 @@ const FilesTableView = ({
       <tbody>
         {data.map((row, index) => (
           <tr key={`${row.file}-${index}`}>
-            <td>{row.file}</td>
-            <td>{row.text}</td>
-            <td>{row.number.toLocaleString()}</td>
-            <td className="font-monospace text-muted">{row.hex}</td>
+            <td>{row.file || '-'}</td>
+            <td>{row.text || '-'}</td>
+            <td>{row.number != null ? row.number.toLocaleString() : '-'}</td>
+            <td className="font-monospace text-muted">{row.hex || '-'}</td>
           </tr>
         ))}
       </tbody>

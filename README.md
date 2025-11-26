@@ -38,8 +38,8 @@ El proyecto consiste en:
 - ✅ StandardJS en el backend
 - ✅ Filtrado por fileName en el frontend
 - ✅ Docker / Docker Compose
+- ✅ Tests Jest en frontend
 - ⬜ Redux (se usó Context API como alternativa más simple)
-- ⬜ Tests Jest en frontend
 
 ---
 
@@ -100,6 +100,9 @@ npm start
 
 # Build de producción
 npm run build
+
+# Ejecutar tests
+npm test
 ```
 
 La aplicación estará disponible en `http://localhost:3001`
@@ -137,7 +140,9 @@ toolbox-challenge/
         ├── context/
         │   └── FilesContext.jsx # Estado global con Context API
         ├── hooks/
-        │   └── useDebounce.js   # Custom hook para debounce
+        │   ├── useApi.js        # Custom hook para llamadas a la API
+        │   ├── useDebounce.js   # Custom hook para debounce
+        │   └── __tests__/       # Tests de hooks con Jest
         └── components/
             ├── containers/      # Componentes inteligentes (lógica)
             │   ├── FileFilterContainer.jsx
@@ -226,6 +231,7 @@ Obtiene información detallada de validación de un archivo (líneas válidas/in
 - ✅ Estado global con **Context API** (sin Redux)
 - ✅ Peticiones HTTP con `fetch` nativo (sin axios)
 - ✅ Patrón **Container/Presentational** para componentes
+- ✅ Custom hooks: `useApi` (llamadas HTTP) y `useDebounce`
 - ✅ React Bootstrap para UI
 - ✅ Búsqueda con **debounce** (800ms)
 - ✅ Tabla con **columnas ordenables** (asc/desc)
@@ -235,6 +241,7 @@ Obtiene información detallada de validación de un archivo (líneas válidas/in
 - ✅ Modal de debug para archivos con errores (lazy loading)
 - ✅ Mensajes diferenciados: archivo vacío vs archivo inexistente
 - ✅ Sin strings hardcodeados (todo en `constants/`)
+- ✅ Tests con Jest + React Testing Library
 - ✅ Webpack 5 con Hot Module Replacement
 
 ### DevOps
@@ -248,7 +255,7 @@ Obtiene información detallada de validación de un archivo (líneas válidas/in
 
 ## 🧪 Tests
 
-### Ejecutar tests del backend
+### Backend Tests (Mocha + Chai)
 
 ```bash
 cd backend
@@ -260,6 +267,20 @@ npm test
 - ✅ `GET /files/data` retorna array de archivos con formato correcto
 - ✅ `GET /files/data?fileName=xxx` filtra correctamente
 - ✅ `GET /files/list` retorna lista de archivos
+
+### Frontend Tests (Jest + React Testing Library)
+
+```bash
+cd frontend
+npm test
+```
+
+**Tests incluidos:**
+
+- ✅ Componentes: Header, Footer, FilesTableView, FileFilterView
+- ✅ Hooks: useApi, useDebounce
+- ✅ Constants y configuración
+- ✅ 40+ tests con 100% de coverage en componentes clave
 
 ---
 
@@ -315,6 +336,7 @@ docker ps
 | **`https` y `fetch` nativos**       | Sin dependencias externas para HTTP, código más liviano y sin axios             |
 | **Context API** en lugar de Redux   | Menor complejidad para el scope del proyecto, sin boilerplate adicional          |
 | **Patrón Container/Presentational** | Separación clara entre lógica y UI, mejor testeabilidad                          |
+| **Custom hook useApi**              | Centraliza lógica de HTTP, elimina código duplicado, facilita testing            |
 | **StandardJS**                      | Estilo consistente sin configuración, sin punto y coma                           |
 | **Debounce en búsqueda**            | Evita requests excesivos mientras el usuario escribe                             |
 | **Lazy loading del modal**          | Mejor performance inicial, carga solo cuando se necesita                         |
